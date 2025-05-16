@@ -1,4 +1,4 @@
-# FreedominChina.github.io
+# Freedom in China
 
 This is a website created to raise awarness about China's politics, power and justice.
 (This website is created for my english homework, so don't take things in it seriously)
