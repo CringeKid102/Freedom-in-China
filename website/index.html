@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Politics, Power & Justice in China</title>
+  <style>
+    :root {
+      --main-color: #d60000;
+      --bg-color: #f9f9f9;
+      --accent-color: #fff5f5;
+      --text-color: #333;
+      --nav-bg: #222;
+      --transition-speed: 0.4s;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg-color);
+      margin: 0;
+      color: var(--text-color);
+      line-height: 1.6;
+      position: relative;
+      overflow-x: hidden;
+    }
+    header {
+      background: linear-gradient(to right, var(--main-color), #ff4c4c);
+      color: white;
+      padding: 2rem 1rem;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    header h1 {
+      margin-bottom: 0.5rem;
+      font-size: 2.5rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+      animation: slideInFromTop 1s ease-out;
+    }
+    header p {
+      font-size: 1.2rem;
+      opacity: 0;
+      animation: fadeIn 1s ease-out 0.5s forwards;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20"><circle cx="1" cy="1" r="1" fill="rgba(255,255,255,0.08)"/></svg>') repeat;
+      z-index: 0;
+    }
+    nav {
+      background-color: var(--nav-bg);
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    nav.scrolled {
+      padding: 0.2rem 0;
+      background-color: rgba(34, 34, 34, 0.9);
+      backdrop-filter: blur(5px);
+    }
+    nav a {
+      color: white;
+      padding: 1rem;
+      text-decoration: none;
+      transition: all var(--transition-speed);
+      position: relative;
+      font-weight: 500;
+    }
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background-color: var(--main-color);
+      transition: all var(--transition-speed);
+      transform: translateX(-50%);
+    }
+    nav a:hover::after {
+      width: 80%;
+    }
+    nav a:hover {
+      background-color: rgba(214, 0, 0, 0.2);
+      color: #fff;
+    }
+    nav a.active {
+      background-color: var(--main-color);
+    }
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.5rem;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+    section {
+      padding: 3rem 2rem;
+      max-width: 900px;
+      margin: auto;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 1s ease;
+    }
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    h2 {
+      color: var(--main-color);
+      position: relative;
+      padding-bottom: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background-color: var(--main-color);
+      transition: width 0.5s ease;
+    }
+    section:hover h2::after {
+      width: 100px;
+    }
+    p {
+      text-align: justify;
+    }
+    .highlight {
+      background-color: rgba(214, 0, 0, 0.1);
+      border-left: 3px solid var(--main-color);
+      padding: 1rem;
+      margin: 1.5rem 0;
+      border-radius: 0 5px 5px 0;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .highlight:hover {
+      transform: translateX(5px);
+      box-shadow: -3px 3px 10px rgba(0, 0, 0, 0.1);
+    }
+    .timeline {
+      position: relative;
+      max-width: 800px;
+      margin: 2rem auto;
+    }
+    .timeline::after {
+      content: '';
+      position: absolute;
+      width: 4px;
+      background-color: var(--main-color);
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      margin-left: -2px;
+    }
+    .timeline-item {
+      padding: 10px 40px;
+      position: relative;
+      width: 50%;
+      opacity: 0;
+      transition: all 0.5s ease;
+    }
+    .timeline-item.visible {
+      opacity: 1;
+    }
+    .timeline-item::after {
+      content: '';
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      background-color: white;
+      border: 4px solid var(--main-color);
+      top: 15px;
+      border-radius: 50%;
+      z-index: 1;
+    }
+    .timeline-left {
+      left: 0;
+      text-align: right;
+    }
+    .timeline-right {
+      left: 50%;
+    }
+    .timeline-left::after {
+      right: -12px;
+    }
+    .timeline-right::after {
+      left: -12px;
+    }
+    .timeline-content {
+      padding: 15px;
+      background-color: white;
+      border-radius: 5px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease;
+    }
+    .timeline-item:hover .timeline-content {
+      transform: scale(1.03);
+    }
+    #infographic {
+      position: relative;
+    }
+    .infographic-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      margin: 2rem 0;
+    }
+    #infographic img {
+      max-width: 100%;
+      height: auto;
+      transition: transform 0.5s ease;
+      display: block;
+    }
+    .infographic-container:hover img {
+      transform: scale(1.02);
+    }
+    .infographic-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .infographic-container:hover .infographic-overlay {
+      opacity: 1;
+    }
+    .infographic-text {
+      text-align: center;
+      padding: 1rem;
+    }
+    .hotspot {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: rgba(214, 0, 0, 0.7);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      cursor: pointer;
+      box-shadow: 0 0 0 rgba(214, 0, 0, 0.4);
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% {
+        box-shadow: 0 0 0 0 rgba(214, 0, 0, 0.4);
+      }
+      70% {
+        box-shadow: 0 0 0 10px rgba(214, 0, 0, 0);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(214, 0, 0, 0);
+      }
+    }
+    .hotspot-tooltip {
+      position: absolute;
+      background-color: white;
+      color: var(--text-color);
+      padding: 0.75rem;
+      border-radius: 4px;
+      width: 200px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      display: none;
+      z-index: 10;
+      transition: opacity 0.3s ease;
+    }
+    #sources ul {
+      padding-left: 1.2rem;
+    }
+    #sources li {
+      margin-bottom: 0.75rem;
+      position: relative;
+      padding-left: 0.5rem;
+      transition: transform 0.2s ease;
+    }
+    #sources li:hover {
+      transform: translateX(5px);
+    }
+    #sources a {
+      color: var(--main-color);
+      text-decoration: none;
+      border-bottom: 1px dotted var(--main-color);
+      transition: border-bottom 0.3s ease;
+    }
+    #sources a:hover {
+      border-bottom: 1px solid var(--main-color);
+    }
+    #subscribe {
+      text-align: center;
+      padding: 4rem 2rem;
+      background-color: var(--accent-color);
+      border-top: 3px solid var(--main-color);
+      position: relative;
+      overflow: hidden;
+    }
+    #subscribe::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 30 30"><path d="M15,3 L28,28 L2,28 Z" fill="rgba(214,0,0,0.03)"/></svg>') repeat;
+      z-index: 0;
+    }
+    #subscribe > * {
+      position: relative;
+      z-index: 1;
+    }
+    .form-container {
+      max-width: 500px;
+      margin: 0 auto;
+      background-color: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      transform: translateY(0);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .form-container:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+    #subscribe input[type="email"] {
+      padding: 12px;
+      width: 100%;
+      margin: 10px 0;
+      border-radius: 4px;
+      border: 1px solid #ddd;
+      font-size: 1rem;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    #subscribe input[type="email"]:focus {
+      outline: none;
+      border-color: var(--main-color);
+      box-shadow: 0 0 0 3px rgba(214, 0, 0, 0.2);
+    }
+    #subscribe button {
+      padding: 12px 24px;
+      background-color: var(--main-color);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-size: 1rem;
+      font-weight: 500;
+      margin-top: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+    #subscribe button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.7s ease;
+    }
+    #subscribe button:hover {
+      background-color: #b30000;
+      transform: translateY(-2px);
+    }
+    #subscribe button:hover::before {
+      left: 100%;
+    }
+    #confirmation {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.5s ease;
+    }
+    #confirmation.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .toggle-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 1rem 0;
+    }
+    .toggle-container span {
+      margin: 0 10px;
+    }
+    .toggle {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 30px;
+    }
+    .toggle input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: 0.4s;
+      border-radius: 30px;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 22px;
+      width: 22px;
+      left: 4px;
+      bottom: 4px;
+      background-color: white;
+      transition: 0.4s;
+      border-radius: 50%;
+    }
+    input:checked + .slider {
+      background-color: var(--main-color);
+    }
+    input:checked + .slider:before {
+      transform: translateX(30px);
+    }
+    .data-chart {
+      margin: 2rem 0;
+      height: 300px;
+      position: relative;
+      overflow: hidden;
+    }
+    .chart-bar {
+      position: absolute;
+      bottom: 0;
+      width: 18%;
+      background-color: var(--main-color);
+      border-radius: 5px 5px 0 0;
+      transition: height 1s ease;
+      opacity: 0.8;
+    }
+    .chart-bar:hover {
+      opacity: 1;
+    }
+    .chart-bar:nth-child(1) { left: 2%; height: 0; }
+    .chart-bar:nth-child(2) { left: 22%; height: 0; }
+    .chart-bar:nth-child(3) { left: 42%; height: 0; }
+    .chart-bar:nth-child(4) { left: 62%; height: 0; }
+    .chart-bar:nth-child(5) { left: 82%; height: 0; }
+    .chart-bar.animate:nth-child(1) { height: 60%; }
+    .chart-bar.animate:nth-child(2) { height: 80%; }
+    .chart-bar.animate:nth-child(3) { height: 95%; }
+    .chart-bar.animate:nth-child(4) { height: 70%; }
+    .chart-bar.animate:nth-child(5) { height: 85%; }
+    .chart-label {
+      position: absolute;
+      bottom: -25px;
+      text-align: center;
+      width: 18%;
+      font-size: 0.8rem;
+    }
+    .chart-label:nth-child(6) { left: 2%; }
+    .chart-label:nth-child(7) { left: 22%; }
+    .chart-label:nth-child(8) { left: 42%; }
+    .chart-label:nth-child(9) { left: 62%; }
+    .chart-label:nth-child(10) { left: 82%; }
+    .chart-value {
+      position: absolute;
+      top: -25px;
+      width: 18%;
+      text-align: center;
+      font-weight: bold;
+    }
+    .chart-bar:nth-child(1) .chart-value { left: 0%; }
+    .chart-bar:nth-child(2) .chart-value { left: 0%; }
+    .chart-bar:nth-child(3) .chart-value { left: 0%; }
+    .chart-bar:nth-child(4) .chart-value { left: 0%; }
+    .chart-bar:nth-child(5) .chart-value { left: 0%; }
+    footer {
+      background-color: var(--nav-bg);
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+      position: relative;
+    }
+    .social-media {
+      margin: 1rem 0;
+    }
+    .social-icon {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      margin: 0 5px;
+      color: white;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+    .social-icon:hover {
+      background: var(--main-color);
+      transform: translateY(-3px);
+    }
+    .back-to-top {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 40px;
+      height: 40px;
+      background-color: var(--main-color);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px);
+      transition: all 0.3s ease;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+    .back-to-top.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+    .back-to-top:hover {
+      background-color: #b30000;
+      transform: translateY(-3px);
+    }
+    .popup {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+    .popup-content {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 8px;
+      max-width: 500px;
+      position: relative;
+      animation: zoomIn 0.3s ease;
+    }
+    .popup-close {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #666;
+      transition: color 0.3s ease;
+    }
+    .popup-close:hover {
+      color: var(--main-color);
+    }
+    .fact-box {
+      background-color: white;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 2rem 0;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+    }
+    .fact-box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+    .fact-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background-color: var(--main-color);
+    }
+    .fact-box h3 {
+      margin-top: 0;
+      color: var(--main-color);
+    }
+    .fact-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+    }
+    .fact-box.active .fact-content {
+      max-height: 500px;
+    }
+    .fact-box::after {
+      content: '+';
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      font-size: 1.5rem;
+      color: var(--main-color);
+      transition: transform 0.3s ease;
+    }
+    .fact-box.active::after {
+      transform: rotate(45deg);
+    }
+    .accordion {
+      margin: 2rem 0;
+    }
+    .accordion-item {
+      border: 1px solid #ddd;
+      margin-bottom: 0.5rem;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .accordion-header {
+      background-color: #f5f5f5;
+      padding: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      position: relative;
+    }
+    .accordion-header::after {
+      content: '+';
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.2rem;
+      transition: transform 0.3s ease;
+    }
+    .accordion-item.active .accordion-header::after {
+      transform: translateY(-50%) rotate(45deg);
+    }
+    .accordion-header:hover {
+      background-color: #eaeaea;
+    }
+    .accordion-content {
+      padding: 0 1rem;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease, padding 0.5s ease;
+    }
+    .accordion-item.active .accordion-content {
+      max-height: 500px;
+      padding: 1rem;
+    }
+    .loader {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--bg-color);
+      z-index: 9999;
+      transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+    .loader.hidden {
+      opacity: 0;
+      visibility: hidden;
+    }
+    .loader-spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid rgba(214, 0, 0, 0.2);
+      border-top-color: var(--main-color);
+      border-radius: 50%;
+      animation: spin 1s infinite linear;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    @keyframes slideInFromTop {
+      from { transform: translateY(-50px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes zoomIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    @media screen and (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+      nav {
+        flex-direction: column;
+        align-items: center;
+        padding: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.5s ease;
+      }
+      nav.open {
+        max-height: 300px;
+      }
+      nav a {
+        width: 100%;
+        text-align: center;
+      }
+      .nav-toggle {
+        display: block;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 1001;
+      }
+      .timeline::after {
+        left: 31px;
+      }
+      .timeline-item {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+      }
+      .timeline-left, .timeline-right {
+        left: 0;
+        text-align: left;
+      }
+      .timeline-left::after, .timeline-right::after {
+        left: 15px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="loader">
+    <div class="loader-spinner"></div>
+  </div>
+
+  <header>
+    <h1>Politics, Power & Justice in China</h1>
+    <p>Understanding the control and justice challenges faced by citizens</p>
+  </header>
+
+  <button class="nav-toggle">☰</button>
+  <nav>
+    <a href="#issue" class="nav-link">The Issue</a>
+    <a href="#impact" class="nav-link">Impact</a>
+    <a href="#data" class="nav-link">Data</a>
+    <a href="#infographic" class="nav-link">Infographic</a>
+    <a href="#history" class="nav-link">Timeline</a>
+    <a href="#facts" class="nav-link">Quick Facts</a>
+    <a href="#sources" class="nav-link">Sources</a>
+    <a href="#subscribe" class="nav-link">Subscribe</a>
+  </nav>
+
+  <section id="issue">
+    <h2>The Issue</h2>
+    <p>
+      In China, the concentration of political power within the Chinese Communist Party
+      has raised ongoing concerns about human rights, freedom of speech, and the abuse
+      of justice systems to maintain control. Surveillance, censorship, and detention of
+      political dissidents remain key challenges.
+    </p>
+    <div class="highlight">
+      <p><strong>Did you know?</strong> China has over 200 million surveillance cameras installed nationwide, making it the country with the most extensive surveillance network in the world.</p>
+    </div>
+    <div class="toggle-container">
+      <span>Light Mode</span>
+      <label class="toggle">
+        <input type="checkbox" id="dark-mode-toggle">
+        <span class="slider"></span>
+      </label>
+      <span>Dark Mode</span>
+    </div>
+  </section>
+
+  <section id="impact">
+    <h2>Impact</h2>
+    <p>
+      Citizens are affected by mass surveillance, lack of free press, internet censorship,
+      arbitrary detentions, and restricted access to justice. Minority groups such as Uyghurs
+      have been subjected to re-education camps, while journalists and activists are often
+      silenced. These issues violate several articles of the <a href="https://www.un.org/en/about-us/universal-declaration-of-human-rights" target="_blank">Universal Declaration of Human Rights</a>,
+      which serves as an international standard for the protection of human dignity.
+    </p>
+    <div class="accordion">
+      <div class="accordion-item">
+        <div class="accordion-header">Internet Censorship</div>
+        <div class="accordion-content">
+          <p>China's "Great Firewall" blocks access to numerous foreign websites and services, including Google, Facebook, Twitter, and many news outlets. The government employs over 2 million people to monitor online content and remove material deemed sensitive or harmful to state interests.</p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-header">Freedom of Press</div>
+        <div class="accordion-content">
+          <p>China ranks 177th out of 180 countries in the Press Freedom Index. Journalists who report on sensitive topics often face harassment, job loss, imprisonment, or forced confessions. Foreign correspondents frequently experience obstacles and intimidation.</p>
+        </div>
+      </div>
+      <div class="accordion-item">
+        <div class="accordion-header">Religious Persecution</div>
+        <div class="accordion-content">
+          <p>Religious groups outside state-sanctioned organizations face severe restrictions. This includes Tibetan Buddhists, Christians in underground churches, Falun Gong practitioners, and Muslims, particularly in Xinjiang where over a million Uyghurs have reportedly been detained in "re-education" facilities.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="data">
+    <h2>Surveillance Data</h2>
+    <p>China has significantly increased its surveillance capabilities in recent years. The chart below shows the number of surveillance cameras per 1,000 people in major Chinese cities.</p>
+    <div class="data-chart">
+      <div class="chart-bar">
+        <div class="chart-value">39.1</div>
+      </div>
+      <div class="chart-bar">
+        <div class="chart-value">56.8</div>
+      </div>
+      <div class="chart-bar">
+        <div class="chart-value">73.3</div>
+      </div>
+      <div class="chart-bar">
+        <div class="chart-value">47.2</div>
+      </div>
+      <div class="chart-bar">
+        <div class="chart-value">68.0</div>
+      </div>
+      <div class="chart-label">Beijing</div>
+      <div class="chart-label">Shanghai</div>
+      <div class="chart-label">Shenzhen</div>
+      <div class="chart-label">Guangzhou</div>
+      <div class="chart-label">Chongqing</div>
+    </div>
+    <p class="chart-caption">Data source: Statista Research (2021)</p>
+  </section>
+
+  <section id="infographic">
+    <h2>Infographic</h2>
+    <p>Click on the image or hover over the hotspots to learn more about surveillance systems in China.</p>
+    <div class="infographic-container">
+      <img src="Power vs. Freedom.png" alt="Infographic on Politics and Justice in China" id="infographic-img" />
+      
+      <div class="infographic-overlay">
+        <div class="infographic-text">
+          <h3>China's Mass Surveillance</h3>
+          <p>Click to view detailed information</p>
+        </div>
+      </div>
+      
+      <div class="hotspot" style="top: 25%; left: 30%;" data-tooltip="Facial Recognition: China has deployed over 200 million facial recognition cameras that can identify individuals in crowds and track their movements."></div>
+      <div class="hotspot" style="top: 40%; left: 70%;" data-tooltip="Social Credit System: Tracks behaviors and assigns social scores that can affect access to services, travel privileges, and employment opportunities."></div>
+      <div class="hotspot" style="top: 60%; left: 45%;" data-tooltip="Internet Monitoring: The 'Great Firewall' blocks foreign websites and monitors domestic internet traffic, censoring politically sensitive content."></div>
+      
+      <div class="hotspot-tooltip"></div>
+    </div>
+  </section>
+
+  <section id="history">
+    <h2>History Timeline</h2>
+    <div class="timeline">
+      <div class="timeline-item timeline-left">
+        <div class="timeline-content">
+          <h3>1949</h3>
+          <p>Establishment of the People's Republic of China under the leadership of Mao Zedong and the Chinese Communist Party.</p>
+        </div>
+      </div>
+      <div class="timeline-item timeline-right">
+        <div class="timeline-content">
+          <h3>1966-1976</h3>
+          <p>Cultural Revolution period with significant political persecution and violations of human rights.</p>
+        </div>
+      </div>
+      <div class="timeline-item timeline-left">
+        <div class="timeline-content">
+          <h3>1989</h3>
+          <p>Tiananmen Square protests and subsequent crackdown, leading to increased state control of dissent.</p>
+        </div>
+      </div>
+      <div class="timeline-item timeline-right">
+        <div class="timeline-content">
+          <h3>2013</h3>
+          <p>Xi Jinping assumes power, beginning an era of increased centralization of political control and surveillance.</p>
+        </div>
+      </div>
+      <div class="timeline-item timeline-left">
+        <div class="timeline-content">
+          <h3>2017</h3>
+          <p>Mass detention of Uyghurs in Xinjiang begins, raising international concerns about human rights abuses.</p>
+        </div>
+      </div>
+      <div class="timeline-item timeline-right">
+        <div class="timeline-content">
+          <h3>2020</h3>
+          <p>Implementation of Hong Kong National Security Law, reducing political freedoms in the region.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="facts">
+    <h2>Quick Facts</h2>
+    <div class="fact-box">
+      <h3>Surveillance Technology</h3>
+      <div class="fact-content">
+        <p>China has an estimated 200+ million surveillance cameras—that's approximately one camera for every seven citizens. Many of these cameras are equipped with facial recognition technology that can identify individuals in real-time and track their movements across cities.</p>
+      </div>
+    </div>
+    <div class="fact-box">
+      <h3>Internet Censorship</h3>
+      <div class="fact-content">
+        <p>China employs over 2 million internet censors to monitor and control online content. The "Great Firewall" blocks access to over 10,000 domain names including Google, Facebook, Twitter, and many international news outlets. VPN use is restricted, and violations can result in fines or imprisonment.</p>
+      </div>
+    </div>
+    <div class="fact-box">
+      <h3>Social Credit System</h3>
+      <div class="fact-content">
+        <p>China's social credit system rates citizens based on behaviors ranging from financial creditworthiness to social behaviors. Low scores can result in restrictions on travel, access to education, slower internet speeds, and public shaming. The system is expected to be fully operational nationwide by 2025.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="sources">
+    <h2>Works Cited</h2>
+    <ul>
+      <li>Xu, Shilin. "Distribution of Surveillance Cameras in Tianjin, China." <em>ResearchGate</em>. <a href="https://www.researchgate.net/figure/Distribution-of-surveillance-camera-in-Tianjin-China_fig3_338201962" target="_blank">Link</a></li>
+      <li>"As China's Communist Party gathers, Xi Jinping is set to tighten his grip on power." <em>Los Angeles Times</em>, October 17, 2017. <a href="https://www.latimes.com/world/asia/la-fg-party-congress-preview-2017-htmlstory.html" target="_blank">Link</a></li>
+      <li>Freedom House. "Freedom in the World 2023: China." <a href="https://freedomhouse.org/country/china/freedom-world/2023" target="_blank">Link</a></li>
+      <li>Statista. "Number of surveillance cameras in China as of 2021." <a href="https://www.statista.com/statistics/1044288/china-number-of-surveillance-cameras-by-city/" target="_blank">Link</a></li>
+      <li>Human Rights Watch. "China's Global Threat to Human Rights." <a href="https://www.hrw.org/world-report/2021/country-chapters/global" target="_blank">Link</a></li>
+      <li>United Nations. "The Universal Declaration of Human Rights." <a href="https://www.un.org/en/about-us/universal-declaration-of-human-rights" target="_blank">Link</a></li>
+    </ul>
+  </section>
+
+  <section id="subscribe">
+    <h2>Stay Informed</h2>
+    <p>Enter your email to get notifications and updates on new articles about politics and justice in China.</p>
+    <div class="form-container">
+      <form id="emailForm">
+        <input type="email" name="email" placeholder="Your email address" required />
+        <button type="submit">Subscribe</button>
+      </form>
+      <p id="confirmation" style="color: green;">Thank you for subscribing!</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Awareness Project | Designed to inform and empower.</p>
+    <div class="social-media">
+      <a href="#" class="social-icon">FB</a>
+      <a href="#" class="social-icon">TW</a>
+      <a href="#" class="social-icon">IG</a>
+      <a href="#" class="social-icon">YT</a>
+    </div>
+    <p>Contact: info@awarenessproject.org</p>
+  </footer>
+
+  <a href="#" class="back-to-top">↑</a>
+
+  <div class="popup" id="popup">
+    <div class="popup-content">
+      <span class="popup-close">&times;</span>
+      <h2 id="popup-title">Title</h2>
+      <div id="popup-body">Content goes here</div>
+    </div>
+  </div>
+
+  <script>
+    // Page loader
+    window.addEventListener('load', function() {
+      setTimeout(function() {
+        document.querySelector('.loader').classList.add('hidden');
+      }, 800);
+    });
+
+    // Scroll animations
+    function checkVisible() {
+      const sections = document.querySelectorAll('section');
+      const windowHeight = window.innerHeight;
+      
+      sections.forEach(section => {
+        const sectionTop = section.getBoundingClientRect().top;
+        if (sectionTop < windowHeight * 0.75) {
+          section.classList.add('visible');
+        }
+      });
+      
+      const timelineItems = document.querySelectorAll('.timeline-item');
+      timelineItems.forEach(item => {
+        const itemTop = item.getBoundingClientRect().top;
+        if (itemTop < windowHeight * 0.85) {
+          item.classList.add('visible');
+        }
+      });
+      
+      const chartBars = document.querySelectorAll('.chart-bar');
+      const chartSection = document.getElementById('data');
+      if (chartSection) {
+        const chartTop = chartSection.getBoundingClientRect().top;
+        if (chartTop < windowHeight * 0.75) {
+          chartBars.forEach(bar => {
+            bar.classList.add('animate');
+          });
+        }
+      }
+    }
+
+    // Smooth scrolling for navigation
+    document.querySelectorAll('nav a').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        
+        window.scrollTo({
+          top: targetElement.offsetTop - 60,
+          behavior: 'smooth'
+        });
+        
+        // Update active nav link
+        document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+
+    // Sticky navigation
+    window.addEventListener('scroll', function() {
+      const nav = document.querySelector('nav');
+      const backToTop = document.querySelector('.back-to-top');
+      
+      if (window.scrollY > 100) {
+        nav.classList.add('scrolled');
+        backToTop.classList.add('show');
+      } else {
+        nav.classList.remove('scrolled');
+        backToTop.classList.remove('show');
+      }
+      
+      // Update active nav link based on scroll position
+      const scrollPosition = window.scrollY;
+      document.querySelectorAll('section').forEach(section => {
+        const sectionTop = section.offsetTop - 100;
+        const sectionBottom = sectionTop + section.offsetHeight;
+        const sectionId = section.getAttribute('id');
+        
+        if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+          document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+          document.querySelector(`nav a[href="#${sectionId}"]`)?.classList.add('active');
+        }
+      });
+      
+      checkVisible();
+    });
+
+    // Dark mode toggle
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+    darkModeToggle.addEventListener('change', function() {
+      if (this.checked) {
+        document.documentElement.style.setProperty('--bg-color', '#1a1a1a');
+        document.documentElement.style.setProperty('--text-color', '#f0f0f0');
+        document.documentElement.style.setProperty('--accent-color', '#2a2a2a');
+      } else {
+        document.documentElement.style.setProperty('--bg-color', '#f9f9f9');
+        document.documentElement.style.setProperty('--text-color', '#333');
+        document.documentElement.style.setProperty('--accent-color', '#fff5f5');
+      }
+    });
+
+    // Infographic hotspots
+    const hotspots = document.querySelectorAll('.hotspot');
+    const tooltip = document.querySelector('.hotspot-tooltip');
+    
+    hotspots.forEach(hotspot => {
+      hotspot.addEventListener('mouseenter', function() {
+        const tooltipText = this.getAttribute('data-tooltip');
+        tooltip.textContent = tooltipText;
+        tooltip.style.display = 'block';
+        tooltip.style.top = (this.offsetTop + 25) + 'px';
+        tooltip.style.left = this.offsetLeft + 'px';
+      });
+      
+      hotspot.addEventListener('mouseleave', function() {
+        tooltip.style.display = 'none';
+      });
+      
+      hotspot.addEventListener('click', function() {
+        showPopupWithContent('Information', this.getAttribute('data-tooltip'));
+      });
+    });
+
+    // Infographic click
+    document.querySelector('.infographic-overlay').addEventListener('click', function() {
+      showPopupWithContent('China\'s Mass Surveillance Systems', `
+        <p>China has developed one of the world's most extensive surveillance networks:</p>
+        <ul>
+          <li><strong>Facial Recognition:</strong> Over 200 million cameras can identify individuals in real-time</li>
+          <li><strong>Social Credit System:</strong> Monitors and scores citizens based on behavior</li>
+          <li><strong>Internet Surveillance:</strong> Monitors online activity and censors content</li>
+          <li><strong>Mobile Tracking:</strong> Monitors location and communications through phones</li>
+          <li><strong>AI-Powered Analysis:</strong> Uses artificial intelligence to process massive amounts of data</li>
+        </ul>
+        <p>This comprehensive system allows authorities to monitor citizens' activities in unprecedented ways, raising significant concerns about privacy and civil liberties.</p>
+      `);
+    });
+
+    // Fact box toggle
+    const factBoxes = document.querySelectorAll('.fact-box');
+    factBoxes.forEach(box => {
+      box.addEventListener('click', function() {
+        this.classList.toggle('active');
+      });
+    });
+
+    // Accordion functionality
+    const accordionItems = document.querySelectorAll('.accordion-item');
+    accordionItems.forEach(item => {
+      const header = item.querySelector('.accordion-header');
+      header.addEventListener('click', function() {
+        // Close other items
+        accordionItems.forEach(otherItem => {
+          if (otherItem !== item) {
+            otherItem.classList.remove('active');
+          }
+        });
+        // Toggle current item
+        item.classList.toggle('active');
+      });
+    });
+
+    // Email form submission
+    document.getElementById('emailForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const confirmation = document.getElementById('confirmation');
+      const email = this.querySelector('input[type="email"]').value;
+      
+      // Simple validation
+      if (email && email.includes('@') && email.includes('.')) {
+        this.style.display = 'none';
+        confirmation.classList.add('show');
+        
+        // Show popup confirmation
+        setTimeout(function() {
+          showPopupWithContent('Subscription Confirmed', `
+            <p>Thank you for subscribing to our newsletter!</p>
+            <p>We'll keep you updated with the latest information on politics, power, and justice in China.</p>
+            <p>Your email: ${email}</p>
+          `);
+        }, 1000);
+      }
+    });
+
+    // Back to top button
+    document.querySelector('.back-to-top').addEventListener('click', function(e) {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+
+    // Popup functionality
+    function showPopupWithContent(title, content) {
+      const popup = document.getElementById('popup');
+      const popupTitle = document.getElementById('popup-title');
+      const popupBody = document.getElementById('popup-body');
+      
+      popupTitle.textContent = title;
+      popupBody.innerHTML = content;
+      popup.style.display = 'flex';
+    }
+
+    document.querySelector('.popup-close').addEventListener('click', function() {
+      document.getElementById('popup').style.display = 'none';
+    });
+
+    // Close popup when clicking outside content
+    document.getElementById('popup').addEventListener('click', function(e) {
+      if (e.target === this) {
+        this.style.display = 'none';
+      }
+    });
+
+    // Mobile navigation toggle
+    document.querySelector('.nav-toggle').addEventListener('click', function() {
+      document.querySelector('nav').classList.toggle('open');
+    });
+
+    // Initialize
+    checkVisible();
+    
+    // Create dynamic content based on user interaction
+    let visitCount = localStorage.getItem('visitCount') || 0;
+    visitCount = parseInt(visitCount) + 1;
+    localStorage.setItem('visitCount', visitCount);
+    
+    if (visitCount > 1) {
+      const welcomeBack = document.createElement('div');
+      welcomeBack.className = 'highlight';
+      welcomeBack.innerHTML = `<p><strong>Welcome back!</strong> This is your visit #${visitCount}. Thanks for your continued interest in this important topic.</p>`;
+      document.querySelector('#issue').insertBefore(welcomeBack, document.querySelector('#issue p'));
+    }
+
+    // Add mouse trail effect for interactivity
+    const body = document.querySelector('body');
+    const trail = document.createElement('div');
+    trail.className = 'mouse-trail';
+    trail.style.position = 'fixed';
+    trail.style.width = '8px';
+    trail.style.height = '8px';
+    trail.style.borderRadius = '50%';
+    trail.style.backgroundColor = 'var(--main-color)';
+    trail.style.pointerEvents = 'none';
+    trail.style.opacity = '0.7';
+    trail.style.zIndex = '9999';
+    trail.style.transition = 'transform 0.1s, opacity 0.5s';
+    trail.style.transform = 'translate(-50%, -50%)';
+    body.appendChild(trail);
+
+    document.addEventListener('mousemove', function(e) {
+      trail.style.left = e.clientX + 'px';
+      trail.style.top = e.clientY + 'px';
+      trail.style.opacity = '0.7';
+      
+      setTimeout(function() {
+        trail.style.opacity = '0';
+      }, 200);
+    });
+  </script>
+</body>
+</html>
