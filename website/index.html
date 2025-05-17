@@ -759,6 +759,112 @@
       .timeline-left::after, .timeline-right::after {
         left: 15px;
       }
+      .news-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        margin-top: 2rem;
+      }
+      
+      .news-item {
+        background-color: white;
+        border-radius: 8px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        position: relative;
+        border-left: 4px solid var(--main-color);
+      }
+      
+      .news-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+      }
+      
+      .news-date {
+        color: #666;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+      }
+      
+      .news-item h3 {
+        margin-top: 0;
+        margin-bottom: 0.75rem;
+        color: var(--main-color);
+        font-size: 1.25rem;
+      }
+      
+      .news-item p {
+        margin-bottom: 1rem;
+        text-align: left;
+      }
+      
+      .news-link {
+        display: inline-block;
+        color: var(--main-color);
+        text-decoration: none;
+        font-weight: 500;
+        padding: 0.25rem 0;
+        border-bottom: 1px solid transparent;
+        transition: border-bottom 0.3s ease;
+      }
+      
+      .news-link:hover {
+        border-bottom: 1px solid var(--main-color);
+      }
+      
+      .load-more-container {
+        text-align: center;
+        margin-top: 1.5rem;
+      }
+      
+      .load-more-btn {
+        padding: 0.75rem 1.5rem;
+        background-color: var(--main-color);
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: 500;
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .load-more-btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.7s ease;
+      }
+      
+      .load-more-btn:hover {
+        background-color: #b30000;
+        transform: translateY(-2px);
+      }
+      
+      .load-more-btn:hover::before {
+        left: 100%;
+      }
+      body.dark-mode .news-item {
+        background-color: #2a2a2a;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      }
+      
+      body.dark-mode .news-date {
+        color: #aaa;
+      }
+      
+      @media screen and (max-width: 768px) {
+        .news-item {
+          padding: 1.25rem;
+        }
+      }
     }
   </style>
 </head>
@@ -973,6 +1079,52 @@
     </div>
   </section>
 
+  <section id="news">
+    <h2>News & Updates</h2>
+    <p>Stay current with the latest developments in Chinese politics and governance.</p>
+    
+    <div class="news-container">
+      <div class="news-item">
+        <div class="news-date">April 28, 2025</div>
+        <h3>China Announces New Technology Regulations</h3>
+        <p>China's cyberspace regulator has introduced stricter rules for technology companies operating in the country. The new regulations require additional data security measures and enhanced government access to algorithmic systems.</p>
+        <a href="#" class="news-link">Read more</a>
+      </div>
+      
+      <div class="news-item">
+        <div class="news-date">April 15, 2025</div>
+        <h3>Party Congress Preparations Begin</h3>
+        <p>Officials have started preparations for the upcoming 21st National Congress of the Chinese Communist Party. The congress, held every five years, will determine key leadership positions and policy directions for the next term.</p>
+        <a href="#" class="news-link">Read more</a>
+      </div>
+      
+      <div class="news-item">
+        <div class="news-date">March 30, 2025</div>
+        <h3>New Environmental Protection Policies Announced</h3>
+        <p>The National People's Congress has approved a comprehensive plan to reduce carbon emissions and strengthen environmental protection measures across industries. The legislation introduces stricter penalties for violations.</p>
+        <a href="#" class="news-link">Read more</a>
+      </div>
+      
+      <div class="news-item">
+        <div class="news-date">March 12, 2025</div>
+        <h3>Government Restructuring Consolidates Power</h3>
+        <p>A major government restructuring has merged several regulatory agencies, further centralizing control under core party leadership. The move is part of an ongoing reform to streamline decision-making processes.</p>
+        <a href="#" class="news-link">Read more</a>
+      </div>
+      
+      <div class="news-item">
+        <div class="news-date">February 25, 2025</div>
+        <h3>International Relations: New Diplomatic Initiative</h3>
+        <p>China has launched a new diplomatic initiative aimed at strengthening economic ties with countries in Southeast Asia and Africa. The program includes infrastructure development projects and technology transfers.</p>
+        <a href="#" class="news-link">Read more</a>
+      </div>
+      
+      <div class="load-more-container">
+        <button id="load-more-news" class="load-more-btn">Load More News</button>
+      </div>
+    </div>
+  </section>
+
   <footer>
     <p>© 2025 Awareness Project | Designed to inform and empower.</p>
     <div class="social-media">
@@ -1031,7 +1183,7 @@
             bar.classList.add('animate');
           });
         }
-      }
+      } 
     }
 
     // Smooth scrolling for navigation
@@ -1254,6 +1406,92 @@
         trail.style.opacity = '0';
       }, 200);
     });
+
+      document.getElementById('load-more-news').addEventListener('click', function() {
+    const newsContainer = document.querySelector('.news-container');
+    
+    // Create more news items dynamically
+    const additionalNews = [
+      {
+        date: 'February 14, 2025',
+        title: 'Judicial System Reforms Announced',
+        content: 'The Supreme People\'s Court has announced new reforms aimed at standardizing court procedures nationwide. The changes include new guidelines for evidence handling and case management.',
+      },
+      {
+        date: 'January 30, 2025',
+        title: 'Anti-Corruption Campaign Enters New Phase',
+        content: 'The Central Commission for Discipline Inspection has launched a new phase of its anti-corruption campaign, focusing on financial institutions and technology companies with increased scrutiny.',
+      },
+      {
+        date: 'January 12, 2025',
+        title: 'Regional Governance Changes Implemented',
+        content: 'Several provinces have implemented new governance structures that increase direct reporting to central authorities. The reorganization affects local decision-making processes across multiple sectors.',
+      }
+    ];
+    
+    additionalNews.forEach(news => {
+      const newsElement = document.createElement('div');
+      newsElement.className = 'news-item';
+      newsElement.innerHTML = `
+        <div class="news-date">${news.date}</div>
+        <h3>${news.title}</h3>
+        <p>${news.content}</p>
+        <a href="#" class="news-link">Read more</a>
+      `;
+      newsContainer.insertBefore(newsElement, document.querySelector('.load-more-container'));
+      
+      // Add animation
+      setTimeout(() => {
+        newsElement.style.opacity = '0';
+        newsElement.style.transform = 'translateY(20px)';
+        
+        // Force reflow
+        void newsElement.offsetWidth;
+        
+        newsElement.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        newsElement.style.opacity = '1';
+        newsElement.style.transform = 'translateY(0)';
+      }, 10);
+    });
+    
+    // Hide the button after loading more news
+    this.textContent = 'No More News';
+    this.disabled = true;
+    this.style.opacity = '0.7';
+    this.style.cursor = 'not-allowed';
+  });
+
+  // Update navigation and section visibility checking
+  document.addEventListener('DOMContentLoaded', function() {
+    // Add News link to navigation
+    const nav = document.querySelector('nav');
+    const sourcesLink = document.querySelector('a[href="#sources"]');
+    
+    const newsLink = document.createElement('a');
+    newsLink.href = '#news';
+    newsLink.className = 'nav-link';
+    newsLink.textContent = 'News';
+    
+    nav.insertBefore(newsLink, sourcesLink);
+    
+    // Update the visible sections function to include news section
+    const originalCheckVisible = window.checkVisible;
+    window.checkVisible = function() {
+      originalCheckVisible();
+      
+      const newsSection = document.querySelector('#news');
+      if (newsSection) {
+        const sectionTop = newsSection.getBoundingClientRect().top;
+        const windowHeight = window.innerHeight;
+        
+        if (sectionTop < windowHeight * 0.75) {
+          newsSection.classList.add('visible');
+        }
+      }
+    };
+    
+    window.checkVisible();
+  });
   </script>
 </body>
 </html>
