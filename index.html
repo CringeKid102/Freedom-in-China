@@ -1745,7 +1745,8 @@
     const newsList = document.getElementById('news-list');
     if (newsList) {
       const apiKey = 'b7704705a19742a7a123c23157a05375'; // Replace with your real API key
-      const url = `https://newsapi.org/v2/everything?q=china+surveillance&sortBy=publishedAt&language=en&apiKey=${apiKey}`;
+      const proxyUrl = 'https://corsproxy.io/?';
+      const url = `${proxyUrl}https://newsapi.org/v2/everything?q=china+surveillance&sortBy=publishedAt&language=en&apiKey=${apiKey}`;
     
       fetch(url)
         .then(response => {
