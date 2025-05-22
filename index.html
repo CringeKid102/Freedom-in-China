@@ -1141,7 +1141,7 @@
     </div>
     <h2>The Issue</h2>
     <div class="highlight">
-      <p><strong>Welcome back!</strong> This is your visit #3. Thanks for your continued interest in this important topic.</p>
+      <p><strong>Welcome back!</strong> This is your visit #<span class="visit-counter">1</span>. Thanks for your continued interest in this important topic.</p>
     </div>
     <p>
       In China, the concentration of political power within the Chinese Communist Party
@@ -1462,6 +1462,25 @@
       });
       
       checkVisible();
+    });
+    
+    // Enhanced version with session tracking
+    document.addEventListener('DOMContentLoaded', function() {
+      // Session tracking
+      if (!sessionStorage.getItem('isNewVisit')) {
+        // This is a new session (not a page refresh)
+        let visitCount = localStorage.getItem('visitCount') || 0;
+        visitCount = parseInt(visitCount) + 1;
+        localStorage.setItem('visitCount', visitCount);
+        sessionStorage.setItem('isNewVisit', 'true');
+      }
+      
+      // Update display
+      const visitCount = localStorage.getItem('visitCount') || 1;
+      const visitElement = document.querySelector('.visit-counter');
+      if (visitElement) {
+        visitElement.textContent = visitCount;
+      }
     });
   
     // Dark mode toggle
