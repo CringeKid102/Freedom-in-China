@@ -1616,25 +1616,46 @@
         buttonText.style.display = 'none';
         buttonLoading.style.display = 'inline';
         
-        // Simulate processing
-        setTimeout(function() {
-          // Hide form and show confirmation
-          emailForm.style.display = 'none';
-          confirmationDiv.style.display = 'block';
-          
-          // Show popup with more information
-          showPopupWithContent('Subscription Information', `
-            <p>Thank you for your interest in staying informed!</p>
-            <p><strong>What you can do now:</strong></p>
-            <ul>
-              <li>Bookmark this page for future reference</li>
-              <li>Share this information with others</li>
-              <li>Follow reliable news sources for updates</li>
-              <li>Contact human rights organizations to learn more</li>
-            </ul>
-            <p><em>Note: This is an educational project. For real news updates, please follow established news organizations and human rights groups.</em></p>
-          `);
-        }, 1500);
+        fetch('https://formspree.io/f/mzzrovlj', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify({ email: email })
+        })
+        .then(function(response) {
+          if (response.ok) {
+            emailForm.style.display = 'none';
+            confirmationDiv.style.display = 'block';
+            showPopupWithContent('Subscription Information', `
+              <p>Thank you for your interest in staying informed!</p>
+              <p><strong>What you can do now:</strong></p>
+              <ul>
+                <li>Bookmark this page for future reference</li>
+                <li>Share this information with others</li>
+                <li>Follow reliable news sources for updates</li>
+                <li>Contact human rights organizations to learn more</li>
+              </ul>
+              <p><em>Note: This is an educational project. For real news updates, please follow established news organizations and human rights groups.</em></p>
+            `);
+          } else {
+            response.json().then(data => {
+              if (data.errors) {
+                showError(data.errors.map(error => error.message).join(', '));
+              } else {
+                showError('Oops! There was a problem submitting your email.');
+              }
+            });
+          }
+        })
+        .catch(function(error) {
+          showError('Oops! Something went wrong. Please try again later.');
+        })
+        .finally(() => {
+          buttonText.style.display = 'inline';
+          buttonLoading.style.display = 'none';
+        });
         
         function showError(message) {
           errorDiv.textContent = message;
